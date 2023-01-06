@@ -16,6 +16,10 @@ public class DroneController {
     @Autowired
     private DroneService droneService;
 
+    public DroneController(DroneService mockDroneService) {
+        this.droneService = mockDroneService;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<Drone> registerDrone(@RequestBody Drone drone) {
         Drone registeredDrone = droneService.registerDrone(drone);
