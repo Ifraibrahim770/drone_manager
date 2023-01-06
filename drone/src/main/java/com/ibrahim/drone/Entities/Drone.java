@@ -14,11 +14,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 
 public class Drone {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
     @Column(name = "serial_number")
     private String serialNumber;
 
@@ -36,7 +39,7 @@ public class Drone {
     @Enumerated(EnumType.STRING)
     private State state;
 
-    @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "drone")
     private List<Medication> loadedMedications;
 
     public enum Model {
@@ -48,5 +51,15 @@ public class Drone {
     }
 
     // Getters and setters for the properties
+
+    public Drone(String serialNumber, Model model, int weightLimit, int batteryCapacity, State state, List<Medication> loadedMedications) {
+        this.serialNumber = serialNumber;
+        this.model = model;
+        this.weightLimit = weightLimit;
+        this.batteryCapacity = batteryCapacity;
+        this.state = state;
+        this.loadedMedications = loadedMedications;
+    }
+
 
 }

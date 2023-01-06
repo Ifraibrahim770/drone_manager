@@ -1,5 +1,6 @@
 package com.ibrahim.drone.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +32,8 @@ public class Medication {
     private String image;
 
     @ManyToOne
-    @JoinColumn(name = "drone_id")
+    @JsonIgnore
+    @JoinColumn(name = "drone_id", referencedColumnName = "id")
     private Drone drone;
 
     // Getters and setters for the properties
